@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // Recipient
-    $recipient = "mdsalim400@gmail.com";
+    $recipient = "weanadgltd@hotmail.com";
 
     // HTML email content
     $email_content = "
