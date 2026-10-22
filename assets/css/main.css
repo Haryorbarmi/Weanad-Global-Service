@@ -9277,3 +9277,12 @@ input[type=color] {
 @media (max-width: 991px) {
   .wn-hero-slides { left: 0; opacity: .3; -webkit-mask-image: none; mask-image: none; }
 }
+
+/* Weanad team cards: avatar always visible */
+.wn-team-item { padding: 40px; text-align: center; }
+.wn-team-item .tp-fi-team-item-thumb { position: static; opacity: 1; visibility: visible; transform: none; margin-bottom: 25px; }
+.wn-team-item .tp-fi-team-item-thumb img { width: 120px; height: 120px; border: 3px solid #F5B800; }
+.wn-team-item:hover .tp-fi-team-item-content { transform: none; }
+.wn-team-item .tp-fi-team-item-content { margin-bottom: 25px; }
+.wn-team-item .tp-fi-team-item-title { line-height: 1.2; margin-bottom: 6px; }
+.wn-team-item .tp-fi-team-item-social { justify-content: center; }
