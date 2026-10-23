@@ -19,6 +19,8 @@ $(function() {
             type: 'POST',
             url: $(form).attr('action'),
             data: formData,
+            dataType: 'json',
+            headers: { 'Accept': 'application/json' },
 
             beforeSend: function() {
                 // Show waiting message before sending
@@ -31,21 +33,17 @@ $(function() {
             // Success
             $(formMessages).removeClass('error info');
             $(formMessages).addClass('success');
-            $(formMessages).text(response);
+            $(formMessages).text('Thank you! Your message has been sent. We will get back to you shortly.');
 
             // Clear the form
-            $('#contact-form input,#contact-form textarea').val('');
+            $('#contact-form input:not([type=hidden]),#contact-form textarea').val('');
         })
         .fail(function(data) {
             // Error
             $(formMessages).removeClass('success info');
             $(formMessages).addClass('error');
 
-            if (data.responseText !== '') {
-                $(formMessages).text(data.responseText);
-            } else {
-                $(formMessages).text('Oops! An error occured and your message could not be sent.');
-            }
+            $(formMessages).text('Oops! Your message could not be sent. Please email us at weanadgltd@hotmail.com.');
         });
     });
 
