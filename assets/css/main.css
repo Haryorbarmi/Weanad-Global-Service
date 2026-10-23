@@ -9275,7 +9275,11 @@ input[type=color] {
 .tp-fi-hero-overlay::before { z-index: 1; }
 .tp-fi-hero-overlay .tp-fi-hero-shape { z-index: 1; }
 @media (max-width: 991px) {
-  .wn-hero-slides { left: 0; opacity: .3; -webkit-mask-image: none; mask-image: none; }
+  .wn-hero-slides { left: 0; opacity: .75; -webkit-mask-image: none; mask-image: none; }
+  .tp-fi-hero-overlay::before {
+    right: 0;
+    background: linear-gradient(180deg, rgba(244, 247, 245, 0.7) 0%, rgba(244, 247, 245, 0.45) 100%);
+  }
 }
 
 /* Weanad team cards: avatar always visible */
