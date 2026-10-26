@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://weanadglobal.com/</loc><lastmod>2026-10-26</lastmod><priority>1.0</priority></url>
-  <url><loc>https://weanadglobal.com/about.html</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://weanadglobal.com/service.html</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://weanadglobal.com/service-loan.html</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://weanadglobal.com/service-savings.html</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://weanadglobal.com/service-investments.html</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://weanadglobal.com/service-advisory.html</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://weanadglobal.com/contact.html</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
+  <url><loc>https://weanadglobal.com/about</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
+  <url><loc>https://weanadglobal.com/service</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
+  <url><loc>https://weanadglobal.com/service-loan</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
+  <url><loc>https://weanadglobal.com/service-savings</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
+  <url><loc>https://weanadglobal.com/service-investments</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
+  <url><loc>https://weanadglobal.com/service-advisory</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
+  <url><loc>https://weanadglobal.com/contact</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
 </urlset>

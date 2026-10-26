@@ -6,6 +6,11 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // One public address for Google: send www and the workers.dev address to the main domain.
+    if ((url.hostname === 'www.weanadglobal.com' || url.hostname.endsWith('.workers.dev')) && ['GET', 'HEAD'].includes(request.method)) {
+      return Response.redirect(`https://weanadglobal.com${url.pathname}${url.search}`, 301);
+    }
+
     if (url.pathname === '/api/contact') {
       if (request.method !== 'POST') {
         return new Response('Method Not Allowed', { status: 405, headers: { Allow: 'POST' } });
