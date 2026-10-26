@@ -36,6 +36,8 @@ export async function onRequestPost({ request, env }) {
     return json({ ok: false, error: 'Please complete the form and try again.' }, 400);
   }
 
+  if (!env.RESEND_API_KEY) return json({ ok: false, error: 'Mail service is not configured.', code: 'no_key' }, 500);
+
   const from = env.FROM_EMAIL || 'Weanad Global <info@weanadglobal.com>';
   const to = env.TO_EMAIL || 'weanadgltd@hotmail.com';
 
