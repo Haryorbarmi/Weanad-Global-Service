@@ -30,6 +30,11 @@ $(function() {
             }
         })
         .done(function(response) {
+            if (response && response.ok === false) {
+                $(formMessages).removeClass('success info').addClass('error');
+                $(formMessages).text(response.error || 'Oops! Your message could not be sent. Please email us at weanadgltd@hotmail.com.');
+                return;
+            }
             // Success
             $(formMessages).removeClass('error info');
             $(formMessages).addClass('success');
