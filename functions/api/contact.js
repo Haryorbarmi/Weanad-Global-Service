@@ -36,7 +36,7 @@ export async function onRequestPost({ request, env }) {
     return json({ ok: false, error: 'Please complete the form and try again.' }, 400);
   }
 
-  const from = env.FROM_EMAIL || 'Weanad Global <onboarding@resend.dev>';
+  const from = env.FROM_EMAIL || 'Weanad Global <info@weanadglobal.com>';
   const to = env.TO_EMAIL || 'weanadgltd@hotmail.com';
 
   try {
