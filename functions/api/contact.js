@@ -1,4 +1,4 @@
-// Cloudflare Pages Function: POST /api/contact
+// Cloudflare Pages Function: POST /api/contact (sends enquiries via Resend)
 // Env vars: RESEND_API_KEY (secret), FROM_EMAIL, TO_EMAIL
 
 const esc = (s) =>
