@@ -1,16 +1,16 @@
 // Cloudflare Pages Function: POST /api/contact (sends enquiries via Resend)
 // Env vars: RESEND_API_KEY (secret), FROM_EMAIL, TO_EMAIL
 
-const esc = (s) =>
+export const esc = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-const json = (body, status = 200) =>
+export const json = (body, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } });
 
 // Brand colours and image host for emails. Images must be absolute URLs.
-const SITE = 'https://weanadglobal.com';
-const GREEN = '#1C4A3E';
-const GOLD = '#F5B800';
+export const SITE = 'https://weanadglobal.com';
+export const GREEN = '#1C4A3E';
+export const GOLD = '#F5B800';
 
 function autoReplyHtml(name, service, message) {
   const first = esc(name.split(/\s+/)[0]);
@@ -53,7 +53,7 @@ function autoReplyHtml(name, service, message) {
 </body></html>`;
 }
 
-async function sendEmail(env, payload) {
+export async function sendEmail(env, payload) {
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },

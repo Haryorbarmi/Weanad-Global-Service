@@ -1315,9 +1315,9 @@
                      <div class="col-lg-6">
                         <div class="tp-fi-cta-wrapper">
                            <h3 class="tp-fi-cta-title" data-text-split data-letters-fade-in>Ready to talk <br> about your money?</h3>
-                           <div class="tp-fi-cta-input d-flex tp-fade-anim">
-                              <input type="text" placeholder="Your email address">
-                              <button class="tp-btn-event">
+                           <form class="tp-fi-cta-input d-flex tp-fade-anim js-quick-contact" action="/api/callback" method="POST">
+                              <input type="email" name="email" placeholder="Your email address" required aria-label="Your email address"><input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+                              <button type="submit" class="tp-btn-event">
                                  <i class="button-text">Contact us</i>
                                  <i class="button-icon-wrapper">
                                     <img src="assets/img/finance/hero/btn-arrow.svg" loading="lazy" width="16"
@@ -1325,7 +1325,7 @@
                                     <i class="button-dot"></i>
                                  </i>
                               </button>
-                           </div>
+                           </form>
                            <p>Registered company in Nigeria</p>
                         </div>
                      </div>
@@ -1476,6 +1476,7 @@
    <script src="assets/js/plugin.js"></script>
    <script src="assets/js/slider-active.js"></script>
    <script src="assets/js/ajax-form.js"></script>
+   <script src="assets/js/quick-contact.js"></script>
    <script src="assets/js/main.js"></script>
 
 </body>
