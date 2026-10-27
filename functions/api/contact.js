@@ -53,6 +53,30 @@ function autoReplyHtml(name, service, message) {
 </body></html>`;
 }
 
+// Branded wrapper for the internal notifications sent to the Weanad inbox.
+export function notifyHtml(heading, bodyHtml, footnote) {
+  return `<!doctype html>
+<html><body style="margin:0;padding:0;background:#F4F7F5;font-family:Arial,Helvetica,sans-serif;color:#2b2b2b;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F4F7F5;padding:24px 12px;">
+<tr><td align="center">
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:#ffffff;border-radius:8px;overflow:hidden;">
+    <tr><td align="center" style="background:${GREEN};padding:22px 24px;">
+      <img src="${SITE}/assets/img/weanad-icon-white.png" alt="Weanad Global" width="56" style="display:block;border:0;margin:0 auto 8px;">
+      <div style="color:#ffffff;font-size:18px;font-weight:bold;letter-spacing:2px;">WEANAD GLOBAL</div>
+      <div style="color:${GOLD};font-size:11px;letter-spacing:2px;margin-top:4px;">WEBSITE ENQUIRY</div>
+    </td></tr>
+    <tr><td style="padding:28px 32px;font-size:15px;line-height:1.6;">
+      <h2 style="margin:0 0 16px;font-size:20px;color:${GREEN};">${heading}</h2>
+      ${bodyHtml}
+      <p style="margin:18px 0 0;font-size:13px;color:#888;">${footnote}</p>
+    </td></tr>
+    <tr><td style="background:${GREEN};padding:14px 32px;font-size:12px;color:#ffffff;text-align:center;">Weanad Global Services Ltd &middot; weanadglobal.com</td></tr>
+  </table>
+</td></tr>
+</table>
+</body></html>`;
+}
+
 export async function sendEmail(env, payload) {
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -94,16 +118,17 @@ export async function onRequestPost({ request, env }) {
       to: [to],
       reply_to: email,
       subject: `New enquiry from ${name}${subject ? ' - ' + subject : ''}`,
-      html: `<div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;color:#2b2b2b;">
-        <h2 style="margin:0 0 14px;color:${GREEN};">New enquiry from the website</h2>
-        <table cellpadding="8" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:15px;">
+      html: notifyHtml(
+        'New enquiry from the website',
+        `<table cellpadding="8" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:15px;">
           <tr><td style="background:#F4F7F5;width:90px;"><strong>Name</strong></td><td>${esc(name)}</td></tr>
-          <tr><td style="background:#F4F7F5;"><strong>Email</strong></td><td><a href="mailto:${esc(email)}">${esc(email)}</a></td></tr>
+          <tr><td style="background:#F4F7F5;"><strong>Email</strong></td><td><a href="mailto:${esc(email)}" style="color:${GREEN};">${esc(email)}</a></td></tr>
           <tr><td style="background:#F4F7F5;"><strong>Service</strong></td><td>${esc(subject) || '-'}</td></tr>
           <tr><td style="background:#F4F7F5;vertical-align:top;"><strong>Message</strong></td><td>${esc(message).replace(/\n/g, '<br>')}</td></tr>
-        </table>
-        <p style="font-size:13px;color:#888;">Press Reply to answer ${esc(name)} directly.</p>
-      </div>`,
+        </table>`,
+        `Press Reply to answer ${esc(name)} directly.`,
+      ),
+      text: `New enquiry from the website\n\nName: ${name}\nEmail: ${email}\nService: ${subject || '-'}\n\nMessage:\n${message}\n\nPress Reply to answer ${name} directly.`,
     });
 
     // Auto-reply to the visitor. A failure here should not fail the enquiry.
@@ -113,6 +138,7 @@ export async function onRequestPost({ request, env }) {
       reply_to: to,
       subject: 'We received your enquiry - Weanad Global',
       html: autoReplyHtml(name, subject, message),
+      text: `Hi ${name.split(/\s+/)[0]}, thanks for reaching out!\n\nWe have received your message, and it is on its way to our team. Someone will get back to you as soon as we can.\n\n${subject ? `Service: ${subject}\n` : ''}Your message:\n${message}\n\nWeanad Global Services Ltd (RC 8179335)\n31, Mall B, Omida Shopping Mall, Omida, Abeokuta, Nigeria\n+234 814 894 1256 | +234 703 276 3035\n${SITE}`,
     }).catch(() => {});
 
     return json({ ok: true });

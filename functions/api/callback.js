@@ -1,5 +1,5 @@
 // POST /api/callback: quick "contact me" email box (footer and home page call-to-action)
-import { esc, json, sendEmail, SITE, GREEN, GOLD } from './contact.js';
+import { esc, json, sendEmail, notifyHtml, SITE, GREEN, GOLD } from './contact.js';
 
 function thanksHtml() {
   return `<!doctype html>
@@ -59,12 +59,13 @@ export async function onRequestPost({ request, env }) {
       to: [to],
       reply_to: email,
       subject: `Callback request from ${email}`,
-      html: `<div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;color:#2b2b2b;">
-        <h2 style="margin:0 0 14px;color:${GREEN};">Someone wants to be contacted</h2>
-        <p style="font-size:15px;">Email: <a href="mailto:${esc(email)}">${esc(email)}</a></p>
-        ${page ? `<p style="font-size:13px;color:#888;">Sent from: ${esc(page)}</p>` : ''}
-        <p style="font-size:13px;color:#888;">Press Reply to write to them directly.</p>
-      </div>`,
+      html: notifyHtml(
+        'Someone wants to be contacted',
+        `<p style="margin:0;font-size:15px;"><strong>Email:</strong> <a href="mailto:${esc(email)}" style="color:${GREEN};">${esc(email)}</a></p>
+        ${page ? `<p style="margin:8px 0 0;font-size:13px;color:#888;">Sent from: ${esc(page)}</p>` : ''}`,
+        'Press Reply to write to them directly.',
+      ),
+      text: `Someone wants to be contacted\n\nEmail: ${email}${page ? `\nSent from: ${page}` : ''}\n\nPress Reply to write to them directly.`,
     });
 
     await sendEmail(env, {
@@ -73,6 +74,7 @@ export async function onRequestPost({ request, env }) {
       reply_to: to,
       subject: 'Thanks for getting in touch - Weanad Global',
       html: thanksHtml(),
+      text: `Thanks for getting in touch!\n\nWe have your email address, and a member of our team will contact you as soon as we can.\n\nIf you would like to tell us more about what you need, you can reply to this email or call us on +234 814 894 1256.\n\nWeanad Global Services Ltd (RC 8179335)\n31, Mall B, Omida Shopping Mall, Omida, Abeokuta, Nigeria\n${SITE}`,
     }).catch(() => {});
 
     return json({ ok: true });
